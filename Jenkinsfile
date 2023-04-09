@@ -5,7 +5,7 @@ pipeline{
             steps{
                 script{
                     gitCheckout(
-                        branch: "devops"
+                        branch: "devops",
                         url: "https://github.com/anuragjos/mrdevops_java_app.git"
                     )
                     
