@@ -1,4 +1,4 @@
-@Library('my-shared-library')_
+@Library('my-shared-library') _
 pipeline{
     agent any
     stages{
@@ -10,6 +10,13 @@ pipeline{
                         url: "https://github.com/anuragjos/mrdevops_java_app.git"
                     )
                     
+                }
+            }
+        }
+        stage("Maven Unit Test"){
+            steps{
+                script{
+                    mvnTest()
                 }
             }
         }
