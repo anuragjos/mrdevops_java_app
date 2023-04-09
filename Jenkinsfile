@@ -1,8 +1,8 @@
-@Library('my-shared-library') _
+@Library('my-shared-library')_
 pipeline{
     agent any
     stages{
-        stage("Git Checkout from SCM"){
+        stage("Git Checkout SCM"){
             steps{
                 script{
                     gitCheckout(
