@@ -4,7 +4,11 @@ pipeline{
         stage("Git Checkout from SCM"){
             steps{
                 script{
-                    git branch: 'devops', url: 'https://github.com/anuragjos/mrdevops_java_app.git'
+                    gitCheckout(
+                        branch: "devops"
+                        url: "https://github.com/anuragjos/mrdevops_java_app.git"
+                    )
+                    
                 }
             }
         }
