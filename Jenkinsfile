@@ -1,11 +1,8 @@
 @Library('my-shared-library') _
 pipeline{
     agent any
-    docker{
-        image "maven"
-    }
-    stages{
-        stage("Git checkout form SCM"){
+       stages{
+         stage("Git checkout form SCM"){
             steps{
                 script{
                     gitCheckout(
