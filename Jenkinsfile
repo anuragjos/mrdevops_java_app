@@ -1,9 +1,7 @@
 @Library('my-shared-library') _
 pipeline{
  agent any
-  tools {
-        maven 'Maven'
-  }
+ 
     stages{
          stage("Git checkout form SCM"){
             steps{
