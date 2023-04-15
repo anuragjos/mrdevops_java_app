@@ -1,10 +1,10 @@
 @Library('my-shared-library') _
 pipeline{
-    agent any
-    // tools{
-    //     maven 'maven'
-    // }
-       stages{
+ agent any
+  tools {
+        maven 'Maven 3.6.3'
+  }
+    stages{
          stage("Git checkout form SCM"){
             steps{
                 script{
