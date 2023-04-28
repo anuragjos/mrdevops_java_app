@@ -2,12 +2,13 @@
 pipeline{
     agent any
     stages{
-        stage("Git Checkout form SCM"){
-            agent{
+        agent{
                 docker{
                     image 'maven'
                 }
             }
+        stage("Git Checkout form SCM"){
+            
             steps{
                 script{
                     gitCheckout(
