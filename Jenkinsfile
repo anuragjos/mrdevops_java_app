@@ -1,10 +1,13 @@
 @Library('my-shared-library') _
 pipeline{
     agent any
+    parameters{
+        choice(name: 'action', choices: 'create\ndelete', description: 'choice create\Destroy')
+    }
     stages{
         
         stage("Git Checkout form SCM"){
-            
+            when { expression {params.action == 'create'} }
             steps{
                 agent{
                 docker{
@@ -20,6 +23,7 @@ pipeline{
             }
         }
         stage("Unit Test Maven"){
+            when { expression {params.action == 'create'} }
             steps{
                 script{
                     mvnTest()
@@ -27,9 +31,18 @@ pipeline{
             }
         }
         stage("Maven Integration Testing"){
+            when { expression {params.action == 'create'} }
             steps{
                 script{
                     mvnIntegrationTest()
+                }
+            }
+        }
+        stage("Static Code Analysis Sonar Qube"){
+            steps{
+                script{
+                    def  SonarQubecredentialsId = 'sonarqube-api'
+                    staticCodeAnalysis(SonarQubecredentialsId)
                 }
             }
         }
