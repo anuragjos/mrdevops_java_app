@@ -39,10 +39,20 @@ pipeline{
             }
         }
         stage("Static Code Analysis Sonar Qube"){
+            when { expression {params.action == 'create'} }
             steps{
                 script{
                     def  SonarQubecredentialsId = 'sonarqube-api'
                     staticCodeAnalysis(SonarQubecredentialsId)
+                }
+            }
+        }
+        stage("Quality Gate Check Sonar Qube"){
+            when { expression {params.action == 'create'} }
+            steps{
+                script{
+                    def  SonarQubecredentialsId = 'sonarqube-api'
+                    QualityGateStatus(SonarQubecredentialsId)
                 }
             }
         }
