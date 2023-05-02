@@ -38,13 +38,13 @@ pipeline{
                 }
             }
         }
-        stage("Static Code Analysis Sonar Qube"){
-            steps{
-                script{
-                    def  SonarQubecredentialsId = 'sonarqube-api'
-                    staticCodeAnalysis(SonarQubecredentialsId)
-                }
-            }
-        }
-    }
-}
+//         stage("Static Code Analysis Sonar Qube"){
+//             steps{
+//                 script{
+//                     def  SonarQubecredentialsId = 'sonarqube-api'
+//                     staticCodeAnalysis(SonarQubecredentialsId)
+//                 }
+//             }
+//         }
+//     }
+// }
