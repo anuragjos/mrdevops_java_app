@@ -1,0 +1,1 @@
+Create a GitHub action to host application through Cloudfront and S3 bucket. Build the angular application using GitHub actions and upload build on S3 use Cloudfront to host it. GitHub action pipeline should get triggered when there is a commit in code
