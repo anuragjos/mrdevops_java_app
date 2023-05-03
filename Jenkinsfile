@@ -12,10 +12,10 @@ pipeline{
         stage("Git Checkout form SCM"){
             when { expression {params.action == 'create'} }
             steps{
-                agent{
-                docker{
-                    image 'maven'
-                }
+//                 agent{
+//                 docker{
+//                     image 'maven'
+//                 }
             }
                 script{
                     gitCheckout(
