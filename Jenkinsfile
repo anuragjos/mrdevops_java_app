@@ -42,8 +42,7 @@ stage("Integration Test Maven") {
                 }
             }
         }
-    }
-stage(" static code analysis: Sobarqube ") {
+    stage(" static code analysis: Sobarqube ") {
             when { expression { params.action == 'create' } }
             steps {
                 script {
@@ -51,5 +50,7 @@ stage(" static code analysis: Sobarqube ") {
                 }
             }
        }
+    }
+
 }
 
