@@ -10,10 +10,12 @@ pipeline {
     stages {
         stage("Git Checkout") {
             steps {
-                gitCheckout(
-                    branch: 'main',
-                    url: 'https://github.com/anuragjos/mrdevops_java_app.git'
-                )
+                script {
+                    gitCheckout(
+                        branch: 'main',
+                        url: 'https://github.com/anuragjos/mrdevops_java_app.git'
+                    )
+                }
             }
         }
 
@@ -24,14 +26,14 @@ pipeline {
                 }
             }
         }
-    }
-    stage{
-        steps{
-            script {
-                mvnIntegrationTest()
+
+        stage("Integration Test Maven") {
+            steps {
+                script {
+                    mvnIntegrationTest()
+                }
             }
         }
     }
-
 }
 
