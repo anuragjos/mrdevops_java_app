@@ -4,17 +4,23 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'action', choices:'create\ndelete', description: 'choose create/destroy')
+        choice(
+            name: 'action',
+            choices: 'create\ndelete',
+            description: 'choose create/destroy'
+        )
     }
 
     tools {
         maven 'maven'
     }
 
-stages {
-       
-stage("Git Checkout") {
-             when { expression { params.action == 'create' } }
+    stages {
+
+        stage("Git Checkout") {
+            when {
+                expression { params.action == 'create' }
+            }
             steps {
                 script {
                     gitCheckout(
@@ -25,8 +31,10 @@ stage("Git Checkout") {
             }
         }
 
-stage("Unit Test Maven") {
-            when {expression { params.action == 'create' } }
+        stage("Unit Test Maven") {
+            when {
+                expression { params.action == 'create' }
+            }
             steps {
                 script {
                     mvnTest()
@@ -34,23 +42,27 @@ stage("Unit Test Maven") {
             }
         }
 
-stage("Integration Test Maven") {
-            when { expression { params.action == 'create' } }
+        stage("Integration Test Maven") {
+            when {
+                expression { params.action == 'create' }
+            }
             steps {
                 script {
                     mvnIntegrationTest()
                 }
             }
         }
-    stage(" static code analysis: Sobarqube ") {
-            when { expression { params.action == 'create' } }
+
+        stage("Static Code Analysis - SonarQube") {
+            when {
+                expression { params.action == 'create' }
+            }
             steps {
                 script {
-                    staticCodeAnalysis()
+                    def SonarQubecredentialsId = 'sonarqube-api'
+                    staticCodeAnalysis(SonarQubecredentialsId)
                 }
             }
-       }
+        }
     }
-
 }
-
