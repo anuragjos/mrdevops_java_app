@@ -12,8 +12,9 @@ pipeline {
     }
 
 stages {
-        when { expression { params.action == 'create' } }
-        stage("Git Checkout") {
+       
+stage("Git Checkout") {
+             when { expression { params.action == 'create' } }
             steps {
                 script {
                     gitCheckout(
@@ -42,7 +43,7 @@ stage("Integration Test Maven") {
             }
         }
     }
-stage("static code analysis") {
+stage(" static code analysis: Sobarqube ") {
             when { expression { params.action == 'create' } }
             steps {
                 script {
