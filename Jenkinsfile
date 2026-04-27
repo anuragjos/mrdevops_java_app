@@ -10,6 +10,12 @@ pipeline{
                 }
             }
         }
+        stage("Unit Test Maven"){
+             steps{
+                mvnTest()
+            }
+            
+        }
 
     }
 
