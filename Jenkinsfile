@@ -1,24 +1,25 @@
 @Library('my_shared_libraries') _
-pipeline{
+
+pipeline {
     agent any
-    stages{
-        stage("Git Checkout"){
-            steps{
+
+    stages {
+        stage("Git Checkout") {
+            steps {
                 gitCheckout(
                     branch: 'main',
-                    url: 'https://github.com/anuragjos/mrdevops_java_app.git' )
+                    url: 'https://github.com/anuragjos/mrdevops_java_app.git'
+                )
+            }
+        }
+
+        stage("Unit Test Maven") {
+            steps {
+                script {
+                    mvnTest()
                 }
             }
         }
-        stage("Unit Test Maven"){
-
-             steps{
-                   script{
-                    mvnTest()
-                }
-            
-        }
-
     }
 }
 
