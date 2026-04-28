@@ -63,5 +63,17 @@ pipeline {
         }
     }
 }
+    
+    stage("Quality Gates Analysis - SonarQube") {
+    when {
+        expression { params.action == 'create' }
+    }
+    steps {
+        script {
+            QualityGateStatus('sonarqube-api')
+        }
+    }
+}
+    
     }
 }
