@@ -70,7 +70,7 @@ pipeline {
     }
     steps {
         script {
-            QualityGateStatus('sonarqube-api')
+            QualityGateStatus()
         }
     }
 }
