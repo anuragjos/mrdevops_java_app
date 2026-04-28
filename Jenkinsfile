@@ -72,6 +72,15 @@ stage("Quality Gates Analysis - SonarQube") {
         }
     }
 }
+    stage("Maven Build") {
+    when {expression { params.action == 'create' }}
+    steps {
+        script {
+            mvnBuild()
+        }
+    }
+}
+    
     
     }
 }
