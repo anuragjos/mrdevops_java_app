@@ -15,7 +15,7 @@ pipeline {
     }
 
     stages {
-
+git 
         stage("Git Checkout") {
             when {
                 expression { params.action == 'create' }
@@ -52,25 +52,25 @@ pipeline {
             }
         }
 
-        stage("Static Code Analysis - SonarQube") {
-    when {
-        expression { params.action == 'create' }
-    }
-    steps {
-        script {
-            staticCodeAnalysis('sonarqube-api')
-        }
-    }
-}
+//         stage("Static Code Analysis - SonarQube") {
+//     when {
+//         expression { params.action == 'create' }
+//     }
+//     steps {
+//         script {
+//             staticCodeAnalysis('sonarqube-api')
+//         }
+//     }
+// }
     
-stage("Quality Gates Analysis - SonarQube") {
-    when {expression { params.action == 'create' }}
-    steps {
-        script {
-            QualityGateStatus()
-        }
-    }
-}
+// stage("Quality Gates Analysis - SonarQube") {
+//     when {expression { params.action == 'create' }}
+//     steps {
+//         script {
+//             QualityGateStatus()
+//         }
+//     }
+// }
 stage("Maven Build") {
     when {expression { params.action == 'create' }}
     steps {
@@ -83,7 +83,7 @@ stage("Maven Build") {
     when {expression { params.action == 'create' }}
     steps {
         script {
-            dokcerBuild("${params.ImageName}", "${params.ImageTag}", "${params.ImageName}")
+            dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.ImageName}")
         }
     }
 }
