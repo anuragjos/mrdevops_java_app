@@ -88,13 +88,18 @@ stage("Maven Build") {
     }
 }
 stage("Docker Image scan : trivy") {
-    when {expression { params.action == 'create' }}
+    when {
+        expression { params.action == 'create' }
+    }
     steps {
         script {
-            dockerImageScan("${params.ImageName}", "${params.Imagetag}", "${params.DockerhubUser}")
+            dockerImageScan(
+                "${params.ImageName}",
+                "${params.Imagetag}",
+                "${params.DockerhubUser}"
+            )
         }
     }
 }
-
  }
 }
