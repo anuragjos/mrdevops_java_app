@@ -4,11 +4,10 @@ pipeline {
     agent any
 
     parameters {
-        choice(
-            name: 'action',
-            choices: 'create\ndelete',
-            description: 'choose create/destroy'
-        )
+        choice(name: 'action',choices: 'create\ndelete',description: 'choose create/destroy')
+        string(name: 'ImageName', description: "name of the Docker buiild image", defaultValue: 'javaapp')
+        string(name: 'ImageTag', description: "tag of the Docker buiild image", defaultValue: 'v1')
+        string(name: 'AppName', description: "name of the Application" , defaultValue:  'springbootapp')
     }
 
     tools {
@@ -72,7 +71,7 @@ stage("Quality Gates Analysis - SonarQube") {
         }
     }
 }
-    stage("Maven Build") {
+stage("Maven Build") {
     when {expression { params.action == 'create' }}
     steps {
         script {
@@ -80,7 +79,13 @@ stage("Quality Gates Analysis - SonarQube") {
         }
     }
 }
-    
-    
+ stage("Docker Image Build") {
+    when {expression { params.action == 'create' }}
+    steps {
+        script {
+            dokcerBuild("${params.ImageName}", "${params.ImageTag}", "${params.ImageName}")
+        }
     }
+}
+ }
 }
