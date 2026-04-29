@@ -7,7 +7,7 @@ pipeline {
         choice(name: 'action',choices: 'create\ndelete',description: 'choose create/destroy')
         string(name: 'ImageName', description: "name of the Docker buiild image", defaultValue: 'javaapp')
         string(name: 'Imagetag', description: "tag of the Docker buiild image", defaultValue: 'v1')
-        string(name: 'AppName', description: "name of the Application" , defaultValue: 'springboot')
+        string(name: 'DockerhubUser', description: "name of the Dockerhub user" , defaultValue: 'anuragjoshi01')
     }
 
     tools {
@@ -83,7 +83,7 @@ stage("Maven Build") {
     when {expression { params.action == 'create' }}
     steps {
         script {
-            dockerBuild("${params.ImageName}", "${params.Imagetag}", "${params.AppName}")
+            dockerBuild("${params.ImageName}", "${params.Imagetag}", "${params.DockerhubUser}")
         }
     }
 }
